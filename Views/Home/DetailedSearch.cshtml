@@ -1,0 +1,92 @@
+@model Tam_Allyson_HW3.Models.SearchViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DetailedSearch</title>
+
+</head>
+<body>
+
+    <h4>SearchViewModel</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-controller="Home" asp-action="DisplaySearchResults" method="get">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Format"></label>
+                    <select asp-for="Format" class="form-control" asp-items="Html.GetEnumSelectList<Format>()">
+                        <option value="">All Formats</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="GenreID"></label>
+                    <select asp-for="GenreID" class="form-control" asp-items="ViewBag.Genres">
+                        <option value="">All Genres</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Price" class="form-label">Search by Price:</label>
+                    <input asp-for="Price" class="form-control" />
+
+                    <div class="mt-2">
+                        <label class="form-label me-2">Type of Search:</label>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" asp-for="PriceComparison" value="LessThan" class="form-check-input" checked />
+                            <label class="form-check-label">Less Than</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" asp-for="PriceComparison" value="GreaterThan" class="form-check-input" />
+                            <label class="form-check-label">Greater Than</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="ReleasedAfter" class="control-label"></label>
+                    <input asp-for="ReleasedAfter" class="form-control" />
+                    <span asp-validation-for="ReleasedAfter" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Search" class="btn btn-primary" />
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <form asp-controller="Home" asp-action="DisplaySearchResults" method="get">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        </form>
+                    </div>
+                </div>
+
+                <div>
+                    <a asp-action="Index">Back to List</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

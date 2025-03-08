@@ -1,0 +1,84 @@
+@model IEnumerable<Tam_Allyson_HW3.Models.Book>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <h1> Book Details </h1>
+    <title>Index</title>
+
+</head>
+<body>
+    <form asp-action="Index" asp-controller="Home" method="get">
+        <p class="form-group">
+            Search: <input name="SearchString" class="form-control" /><br />
+            <button type="submit" class="btn btn-primary">Search</button>
+            <a asp-action="DetailedSearch" class="btn btn-success">Detailed Search</a>
+            <a asp-action="Index" class="btn btn-danger">Show All</a>
+        </p>
+    </form>
+
+    <p><strong>Displaying @ViewBag.SelectedBooks out of @ViewBag.AllBooks Books</strong></p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Author)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PublishedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BookFormat)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Genre.GenreName)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Author)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PublishedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookFormat)
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.BookID">Details</a> |
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Genre.GenreName)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
